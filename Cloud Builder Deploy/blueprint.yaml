@@ -1,0 +1,44 @@
+formatVersion: 1
+inputs: {}
+resources:
+  Cloud_vSphere_Machine_1:
+    type: Cloud.vSphere.Machine
+    properties:
+      name: test-cb
+      image: OPS OVA
+      ovfProperties:
+        - key: FIPS_ENABLE
+          value: "False"
+        - key: guestinfo.ADMIN_PASSWORD
+          value: 12qwaszx!@QWASZX
+        - key: guestinfo.ADMIN_USERNAME
+          value: admin
+        - key: guestinfo.DNS
+          value: 172.16.53.48
+        - key: guestinfo.domain
+          value: npc.vmw-sddc.lab
+        - key: guestinfo.gateway
+          value: 172.16.169.1
+        - key: guestinfo.hostname
+          value: test-sddc.npc.vmw-sddc.lab
+        - key: guestinfo.ip0
+          value: 172.16.169.100
+        - key: guestinfo.netmask0
+          value: 255.255.255.0
+        - key: guestinfo.ntp
+          value: 172.16.53.44
+        - key: guestinfo.ROOT_PASSWORD
+          value: 12qwaszx!@QWASZX
+        - key: guestinfo.searchpath
+          value: vmw-sddc.lab
+      cpuCount: 4
+      totalMemoryMB: 4096
+      networks:
+        - network: ${resource.Cloud_vSphere_Network_1.id}
+          assignment: static
+  Cloud_vSphere_Network_1:
+    type: Cloud.vSphere.Network
+    properties:
+      networkType: existing
+      constraints:
+        - tag: MGMT
